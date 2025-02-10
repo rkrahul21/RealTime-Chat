@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useAuthStore } from "../store/useAuthStore";
 import toast from "react-hot-toast";
 import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare, User } from "lucide-react";
-import AuthImagePattern from "../components/AuthImagePattern";
+import AuthImagePattern from "../components/AuthImagePattern.jsx";
 import { Link } from "react-router-dom";
 
 
@@ -55,6 +55,7 @@ const SignUpPage = () => {
             </div>
           </div>
 
+          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="form-control">
               <label className="label">
@@ -62,6 +63,7 @@ const SignUpPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  {/* here user icon from lucide react */}
                   <User className="size-5 text-base-content/40" />
                 </div>
                 <input
