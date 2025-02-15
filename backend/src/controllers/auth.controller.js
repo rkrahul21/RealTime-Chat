@@ -86,6 +86,7 @@ export const logout = (req, res) => {
 };
 
 export const updateProfile = async (req, res) => {
+  console.log("Update Profile Payload:", req.body);
   try {
     const { profilePic } = req.body;
     const userId = req.user._id;

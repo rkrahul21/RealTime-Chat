@@ -7,18 +7,17 @@ const ProfilePage = () => {
   const [selectedImg, setSelectedImg] = useState(null);
 
   const handleImageUpload = async (e) => {
+    e.preventDefault();
+    console.log("file from user",e.target.files[0]);
     const file = e.target.files[0];
     if (!file) return;
+    
+    const formdata = new FormData();
+    formdata.append("file", file);
 
-    const reader = new FileReader();
-
-    reader.readAsDataURL(file);
-
-    reader.onload = async () => {
-      const base64Image = reader.result;
-      setSelectedImg(base64Image);
-      await updateProfile({ profilePic: base64Image });
-    };
+    setSelectedImg(URL.createObjectURL(file));
+      await updateProfile({data: formdata});
+  
   };
 
   return (
@@ -40,7 +39,7 @@ const ProfilePage = () => {
                 className="size-32 rounded-full object-cover border-4 "
               />
               <label
-                htmlFor="avatar-upload"
+                htmlFor="avatar"
                 className={`
                   absolute bottom-0 right-0 
                   bg-base-content hover:scale-105
@@ -52,10 +51,10 @@ const ProfilePage = () => {
                 <Camera className="w-5 h-5 text-base-200" />
                 <input
                   type="file"
-                  id="avatar-upload"
+                  id="avatar"
                   className="hidden"
                   accept="image/*"
-                  onChange={handleImageUpload}
+                  onChange={(e) => handleImageUpload(e)}
                   disabled={isUpdatingProfile}
                 />
               </label>
